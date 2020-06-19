@@ -1,0 +1,176 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dokumentacija</title>
+</head>
+<body>
+    <h1>
+        Dokumentacija 
+    </h1>
+    <h2>
+        Opis projektnog zadatka 
+    </h2>
+    <p>
+        Tema projektog zadatka su dječji vrtići. Projekt služi pregled i ažuriranje poslovanja dječjeg vrtića. U projektnom zadatku postoje uloge, svaka uloga ima određena prava pristupa. Uloge koje postoje su: <br />        
+        1. <strong>Neregistrirani korisnik</strong> <br />
+        2. <strong>Regisitrirani korisnik / Roditelj</strong> <br />
+        3. <strong>Moderator / Voditelj </strong> <br />
+        4. <strong>Administrator</strong> <br /> <br />
+        <strong>Neregistrirani korisnik</strong> ima sljedeće funkcionalnosti: može vidjeti popis dječjih vrtića zajedno s prosječnom ocjenom za zadnja tri mjeseca, odabirom vrtića vidi podatke o djeci koja su upisana u taj vrtić, zajedno sa njihovom slikom ako je dana suglasnost roditelja. Može pretraživati javne pozive za upis uz mogućnost filtriranja po naziv vrtiću i uz mogućnost sortiranja po datumu početka ili datumu završetka javnog poziva. Također, ima pristus direktoriju privatno koji je zaštičen .htaccess datotekom i u kojem se nalazi popis svih korisnika i njegovih podataka (ime, prezime, korisničko ime, email, lozinka). <br />
+        <strong>Regisitrirani korisnik, roditelj</strong> može poslati prijavu za upis djeteta u dječji vrtić gdje odabire skupine u koju želi upisati dijete, vidi popis prijava za upisom s informacijom je li njegovo dijete prihvaćeno ili se nalazi na listi čekanja. Može odustati od prijave ili dovršiti upis djeteta u vrti unosom osobnim podataka. Vidi popis dolazaka djeteta u vrtić po mjesecima i popis računa te ih može označiti da su plaćeni.<br />
+        <strong>Moderator ili voditelj vrtića</strong> kreira skupine i navodi cijena na mjesečnoj razini, kreira javni poziv za upise gdje definira broj mjesta i razdoblje od kada i do kada su mogući upisi, vidi popis prijava za upise te nakon roka prihvaća prijave. Evidentira dolazak djeteta u vrtić i izdaje račun, pregledava statistike plaćenih i neplaćenih računa za svoj vrtić u određenom razdoblju za određenu skupinu.<br />
+        <strong>Administrator</strong> vrtića može kreirati novi dječji vrtić i dodijeliti mu moderatora, ima uvid u popis broja djece s brojem plaćenih i neplaćenih računa po vrtiću. Također, svaki mjesec može unijeti ocjenu za rad vrtića, blokirati i otključavati korisničke račune, konfigurirati postavke sustava i pregledati dnevnik logiranja.<br />
+        Svaki korisnik više razine nasljeđuje prava i funkcionalnosti korisnika niže razine.  <br />
+    </p>
+    <h2>
+        Opis projektnog rješenja
+    </h2>
+    <p>
+        Projektno rješenje funkcionalno zadovoljava većinu zahtjeva. Registracija i prijava implementirane su u potpunosti. U radu sustava responzivnost, odnosno prilagođavanje mediju i dizajnu nije implementirano, kao ni kolačić za uvjete korištenja. Zahtjevi neregistriranog korisnika obrađeni su u potpunosti. U funkcionalnostima registriranog korisnika nisu zadovoljeni kreiranje/definiranje, a ostale funkcionalnosti napravljene su djelomično. Kod moderatora implementirana je samo mogućnost kreiranja/definiranja, dok svi ostali zahtjevi nisu riješeni. Nema rješenja za statistiku rada sustava i grafičkih prikaza dok su postavke korisnika, konfiguracija sustava, pregledavanje dnevnika, dodjela moderatora, kreiranje kategora i ostali zahtjevi uspješno implementirane. U posebnim osobinama prikazana su rješenja u područjima Smarty-ja i XSS i SQL ubacivanje. Angular JS nije korišten, kao ni implementacija generiranja PDF dokumenata, SEO linkovi i Notification API. <br/>
+    </p>
+    <h2>
+        ERA model
+    </h2>
+    <img src="../assets/multimedija/era_model.png">
+    <p>
+        ERA model se sastoji od 15 međusobno povezanih tablica.  Glavne tablice su korisnici i djecji_vrtici. Tablice koje nisu povezane su pomak, tablica u koju se popunjava vrijeme pomaka aplikacije u satima iz JSON datototeke i dnevnik u koji se bilježe aktivnosti korisnika. <br />  <br /> 
+    </p>
+    <br /> <br /> <h2>
+        Navigacijski dijagram 
+    <img src="../assets/multimedija/navigacijski.png">
+    <h2>
+        Popis i opis skripata
+    </h2>
+    <h3>
+        Models
+    </h3>
+    <p>
+        1.<strong>DjecjiVrticiGalerijaJson.php</strong>	 - komunikacija s bazom, straničenje i sortiranje prema ajax zahtjevu iz kontrolera <br />
+        2.<strong>DjecjiVrticiGalerijaModel.php</strong>	 - komunikacija s bazom za tablicu djecji vrtici i galeriju slika <br />
+        3.<strong>DjecjiVrticiJson.</strong>	php - komunikacija s bazom, straničenje i sortiranje prema ajax zahtjevu iz kontrolera <br />
+        4.<strong>DjecjiVrticiModel.php</strong>	 - komunikacija s bazom za tablicu djecji vrtici <br />
+        5.<strong>DjecjiVrticiOcjeneModel.php</strong>	 - komunikacija s bazom za tablicu djecji vrtici ocjene <br />
+        6.<strong>DnevnikJson.php</strong>	 - komunikacija s bazom, straničenje i sortiranje prema ajax zahtjevu iz kontrolera <br />
+        7.<strong>DnevnikModel.php</strong>	 - komunikacija s bazom za tablicu dnevnik <br />
+        8.<strong>DolasciModel.php</strong>	 - komunikacija s bazom za tablicu dijete dolasci <br />
+        9.<strong>JavniPoziviJson.php</strong>	 - komunikacija s bazom, straničenje i sortiranje prema ajax zahtjevu iz kontrolera <br />
+        10.<strong>JavniPoziviModel.php</strong>	 - komunikacija s bazom za tablicu javni pozivi <br />
+        11.<strong>KorisniciJson.php</strong>	 – komunikacija s bazom, straničenje i sortiranje prema ajax zahtjevu iz kontrolera <br />
+        12.<strong>KorisniciModel.php</strong>	 – komunikacija s bazom za tablicu korisnici <br />
+        13.<strong>PomakModel.php</strong>	 - komunikacija s bazom za tablicu korisnici <br />
+        14.<strong>PostavkeSustavaModel.php</strong>	 - komunikacija s bazom za tablicu postavke <br />
+        15.<strong>PrijaveZaUpisModel.php</strong>	 - komunikacija s bazom za tablicu prijave za upis <br />
+        16.<strong>RacuniJson.php</strong>	 - komunikacija s bazom, straničenje i sortiranje prema ajax zahtjevu iz kontrolera <br />
+        17.<strong>RacuniModel.php</strong>	 - komunikacija s bazom za tablicu racuni <br />
+        18.<strong>SkupineModel.php</strong>	 - komunikacija s bazom za tablicu skupine <br />
+        19.<strong>TrenutniKorisnik.php</strong>	 – statička klasa za spremanje podataka trenutno prijavljenog korisnika <br />
+    </p>
+    <h3>
+        Controllers
+    </h3>
+    <p>
+        1.<strong>Administracija.php</strong>	 – kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+        2.<strong>AdministracijaOcjene.php</strong>	 – preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        3.<strong>Aktivacija.php</strong>	 - kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+        4.<strong>DjecjiVrtici.php</strong>	 - kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+        5.<strong>DjecjiVrticiGalerijaTrazi.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        6.<strong>DjecjiVrticiRacuni.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        7.<strong>DjecjiVrticiTrazi.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        8.<strong>DnevnikTrazi.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        9.<strong>JavniPozivi.php</strong>	 - kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+        10.<strong>JavniPoziviTrazi.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        11.<strong>KorisniciDolasci.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        12.<strong>KorisniciPrijaveZaUpis.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        13.<strong>KorisniciRacuni.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        14.<strong>KorisniciStatus.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        15.<strong>KorisniciTrazi.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        16.<strong>Moderatori.php</strong>	 - kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+        17.<strong>Pocetna.php</strong>	 - kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+        18.<strong>Prijava.php</strong>	 - kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+        19.<strong>Registracija.php</strong>	 - kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+        20.<strong>RegistracijaProvjeraPodataka.php</strong>	 - preuzima ajax zahtjev, komunicira s modelJson klasom, preuzete podatke vraća ajaxu u obliku JSON-a <br />
+        21.<strong>Registrirani.php</strong>	 - kontroler za preuzimanje zahtjeva za stranicu, priprema podataka i proslijeđivanje u smarty <br />
+    </p>
+    <h3>
+        Views
+    </h3>
+    <p>
+        1.<strong>Administracija.tpl</strong>	 – prikaz funkcionalnosti administratora <br />
+        2.<strong>AdministracijaDnevnik.tpl</strong>	 – prikaz, pretraživanje i sortiranje dnevnika logova <br />
+        3.<strong>AdministracijaDodajVrtic.tpl</strong> – prikaz forme za dodavanje vrtića <br />
+        4.<strong>AdministracijaOcjene.tpl</strong>	 – prikaz forme za dodijeljivanje ocjena vrtiću <br />
+        5.<strong>AdministracijaPomak.tpl</strong>	 – prikaz pomaka vremena  <br />
+        6.<strong>AdministracijaPostavkeSustava.tpl</strong>	 – prikaz postavki sustava <br />
+        7.<strong>AdministracijaRacuni.tpl</strong>	 – prikaz broja računa po vrtiću <br />
+        8.<strong>AdministracijaStatusKorisnika.tpl</strong>	 – prikaz stanja aktivnosti korisnika <br />
+        9.<strong>Aktivacija.tpl</strong>	 – prikaz poruke korisniku o aktivaciji računa <br />
+        10.<strong>DjecjiVrtic.tpl</strong>	 – prikaz dječjih vrtića <br />
+        11.<strong>DjecjiVrticGalerija.tpl</strong>	 – prikaz galerije dječjeg vrtića <br />
+        12.<strong>JavniPozivi.tpl</strong>	 – prikaz javnih poziva <br />
+        13.<strong>Korisnici.tpl</strong>	 – prikaz korisnika <br />
+        14.<strong>Moderator.tpl</strong>	 – prikaz funkcionalnosti moderatora <br />
+        15.<strong>ModeratorKreirajSkupinu.tpl</strong>	 – prikaz forme za kreiranje skupine <br />
+        16.<strong>NemaOvlasti.tpl</strong>	 – prikaz poruke ako korisnik nema ovlasti <br />
+        17.<strong>Pocetna.tpl</strong>	 – prikaz početne stranice <br />
+        18.<strong>Prijava.tpl</strong>	 – prikaz stranice za prijavu <br />
+        19.<strong>Registracija.tpl</strong>	 – prikaz stranice za registraciju <br />
+        20.<strong>Registrirani.tpl</strong>	 – prikaz funkcionalnosti registriranog korisnika <br />
+        21.<strong>RegistriraniDolasci.tpl</strong>	 – prikaz dolazaka djeteta <br />
+        22.<strong>RegistriraniPrijaveZaUpis.tpl</strong>	 – prikaz prijava za upis <br />
+        23.<strong>RegistriraniRacuni.tpl</strong>	 – prikaz računa <br />
+    </p>
+    <h3>
+        Libs
+    </h3>
+    <p>
+        1.<strong>Database.class.php</strong>	 – klasa za spajanje na bazu <br />
+    </p>
+    <h3>
+        Uploads
+    </h3>
+    <p>
+        sadrži slike koje se prikazuju na stranicama. <br />
+    </p>
+    <h3>
+        JavaScript
+    </h3>
+    <p>
+        1.<strong>funkcije.js</strong>  - skripta za korištenje pomoćnih funkcija <br />
+        2.<strong>paginacija.js</strong>  – skripta za implementaciju paginacije na tablicama.<br />
+        3.<strong>registracija.js </strong> – skripta za provjeru podataka registracije na strani klijenta<br />
+        4.<strong>moment.jsmoment.js</strong>  – biblioteka za prikaz datuma u određenom formatu <br />
+        5.<strong>moment-with-locales.js</strong>  - biblioteka za prikaz datuma u određenom formatu <br />
+    </p>
+    <h3>
+        CSS
+    </h3>
+    <p>
+        1.<strong>ihribljan.css</strong>  je glavni stilski jezik<br />
+    </p>
+    <h3>
+        Popis korištenih tehnologija i alata
+    </h3>
+    <p>
+        1.<strong>Visual Studio Code </strong> - alat za uređivanje programskog koda <br />
+        2.<strong>PuTTy </strong> - alat za spajanje na server<br />
+        3.<strong>MySQL Workbench </strong> - alat za izradu modela baze <br />
+        4.<strong>PHPMyAdmin </strong> - alat za izradu baze podataka <br />
+    </p>
+    <h3>
+        Popis vanjskih biblioteka 
+    </h3>
+    <p>
+        1.<strong>JQUERY</strong> <br />
+        2.<strong>Moment</strong>   <br />
+        3.<strong>ReCAPTCHA</strong>  <br />
+        4.<strong>Smarty</strong>   <br />
+        5.<strong>Moment</strong>  <br />
+    </p>
+
+
+•	Kontakt: <a href="mailto:ihribljan@foi.hr">Kontakt</a> 
+•	© 2020.Ivan Hribljan 
+
+</body>
+
+</html>

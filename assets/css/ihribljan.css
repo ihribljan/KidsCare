@@ -130,9 +130,10 @@ a {
 
 .registracija-container-item {
     padding: 10px;
+    width: 500px;
     background-color: transparent;
     text-align: center;
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
@@ -179,7 +180,7 @@ label[for=registracija-label]{
     padding: 20px;
     background-color: transparent;
     text-align: center;
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
@@ -202,14 +203,11 @@ label[for=registracija-label]{
 }
 
 ::placeholder { 
-    color: black;
-}
-
-#registracija-godina-rodenja {
     color: gray;
 }
 
-#login .login-container #djecji-vrtici-tablica, #login .login-container #javni-pozivi-tablica {
+
+#login .login-container #djecji-vrtici-tablica, #login .login-container #javni-pozivi-tablica, #login .login-container #korisnici-tablica  {
     color: black;
     border-spacing: 75px 5px;
     table-layout: fixed;
@@ -218,11 +216,11 @@ label[for=registracija-label]{
     white-space: nowrap;
 }
 
-#login .login-container #djecji-vrtici-tablica, #login .login-container #javni-pozivi-tablica, th {
+#login .login-container #djecji-vrtici-tablica, #login .login-container #javni-pozivi-tablica, #login .login-container #korisnici-tablica, th {
     border-bottom: 1px solid black;
 }
 
-#login .login-container #djecji-vrtici-tablica td, #login .login-container #javni-pozivi-tablica td {
+#login .login-container #djecji-vrtici-tablica td, #login .login-container #javni-pozivi-tablica, #login .login-container #korisnici-tablica,  td {
     padding: 10px 30px;
 }
 

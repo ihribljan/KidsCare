@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-06-11 20:28:23
+/* Smarty version 3.1.34-dev-7, created on 2020-06-18 21:20:24
   from 'D:\xampp\htdocs\projekt\views\DjecjiVrtici.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5ee277c7cb2652_54721580',
+  'unifunc' => 'content_5eebbe788a7de5_08919440',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '672dc66b5b22af3c2a5dce70fc8a9038b4e2d145' => 
     array (
       0 => 'D:\\xampp\\htdocs\\projekt\\views\\DjecjiVrtici.tpl',
-      1 => 1591900096,
+      1 => 1592491744,
       2 => 'file',
     ),
   ),
@@ -20,17 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5ee277c7cb2652_54721580 (Smarty_Internal_Template $_smarty_tpl) {
-?><html>
-    <head>
-        <?php echo '<script'; ?>
- type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"><?php echo '</script'; ?>
->
-    </head>
-
-    <section id="login">
-        <div class="login-container">
-            <table id='djecji-vrtici-tablica'>
+function content_5eebbe788a7de5_08919440 (Smarty_Internal_Template $_smarty_tpl) {
+?>    <section id="login">
+        <div class="login-container">			
+			<div class="loading-overlay" style="display: none;">
+				<div class="overlay-content">Učitavam podatke...</div>
+			</div>
+			
+            <table id="djecji-vrtici-tablica">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -40,59 +37,72 @@ function content_5ee277c7cb2652_54721580 (Smarty_Internal_Template $_smarty_tpl)
                         <th>Administrator</th>
                         <th>Moderator</th>
                         <th>Prosječna ocjena</th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>                
-                        <?php
-$__section_i_0_loop = (is_array(@$_loop=$_smarty_tpl->tpl_vars['lista']->value) ? count($_loop) : max(0, (int) $_loop));
-$__section_i_0_total = $__section_i_0_loop;
-$_smarty_tpl->tpl_vars['__smarty_section_i'] = new Smarty_Variable(array());
-if ($__section_i_0_total !== 0) {
-for ($__section_i_0_iteration = 1, $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index'] = 0; $__section_i_0_iteration <= $__section_i_0_total; $__section_i_0_iteration++, $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index']++){
-?>
-                        <tr>
-                            <td><?php echo $_smarty_tpl->tpl_vars['lista']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_i']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index'] : null)]->Id;?>
-</td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['lista']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_i']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index'] : null)]->Naziv;?>
-</td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['lista']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_i']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index'] : null)]->Adresa;?>
-</td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['lista']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_i']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index'] : null)]->Kapacitet;?>
-</td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['lista']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_i']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index'] : null)]->Administrator;?>
-</td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['lista']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_i']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index'] : null)]->Moderator;?>
-</td>
-                            <td><?php echo $_smarty_tpl->tpl_vars['lista']->value[(isset($_smarty_tpl->tpl_vars['__smarty_section_i']->value['index']) ? $_smarty_tpl->tpl_vars['__smarty_section_i']->value['index'] : null)]->Prosjecna_Ocjena;?>
-</td>
-                        </tr>
-                        <?php
-}
-}
-?>
+                <tbody id="djecji-vrtici-tablica-body">                
+                
                 </tbody>
             </table>   
-
+			
+			<ul id="paginacija"></ul>
+			
             <?php echo '<script'; ?>
 >
-                $(document).ready(function () {
-
-                    $("#djecji-vrtici-tablica").find('tr').click(function () {
-
-                        // get id vrtića
-                        let red = $(this).find('td:first').text();
-
-                        let path = '/projekt/uploads/photogalleries/' + red + '/index.jfif';
-
-                        console.log("path: " + path);
-
-                        window.open(path, '_blank');
-                    });
+				
+				$(document).ready(function () {
+					// kod otvaranja dokumenta pokreni dohvat podataka, bez pojam za pretraživanje i zadani poredak
+                    getAll('', 1, 'asc', 0);
                 });
+
+				let zapisaPoStranici = <?php echo $_smarty_tpl->tpl_vars['stranicenje_broj_stranica']->value;?>
+;
+			
+				function getAll(val, sortPolje, sortTip, zapocniSaZapisom) {
+									
+					$.ajax({
+						type: 'POST',
+						url: 'controllers/DjecjiVrticiTrazi.php',
+						data: 'sort_polje=' + sortPolje + '&sort_tip=' + sortTip + '&zapocni_sa_zapisom=' + zapocniSaZapisom + '&zapisa_po_stranici=' + zapisaPoStranici,
+						
+						beforeSend:function(html){
+							$('.loading-overlay').show();
+							$('#ukupanBrojZapisa').html('');
+						},
+						success:function(json){
+							$('.loading-overlay').hide();							
+							
+							// iz jsona array složit u tablicu
+							$('#djecji-vrtici-tablica-body').html('');
+
+							var obj = jQuery.parseJSON(json);
+										
+							$.each(obj.lista, function(index, val) {
+								let html = 
+									'<tr>' +
+										'<td>' + val.Id + '</td>' +
+										'<td>' + val.Naziv + '</td>' +
+										'<td>' + val.Adresa + '</td>' +
+										'<td>' + val.Kapacitet + '</td>' +
+										'<td>' + val.Administrator + '</td>' +
+										'<td>' + val.Moderator + '</td>' +
+										'<td>' + val.Prosjecna_Ocjena + '</td>' +
+                                        '<td><a href=\"?pg=djecjiVrtici&subpag=galerija&djecjiVrticiId=' + val.Id + '\">Galerija</a></td>' +
+									'</tr>';
+								
+								$('#djecji-vrtici-tablica-body').append(html);
+							});
+
+							// paginacija
+							$('#paginacija').html('');
+							let pag = paginacija(obj.ukupno_zapisa, zapisaPoStranici, zapocniSaZapisom, 'getAll', val, sortPolje, sortTip);	
+							$('#paginacija').html(pag);				
+						}
+					});
+				}
             <?php echo '</script'; ?>
 >
 
         </div>
-    </section>
-</html><?php }
+    </section><?php }
 }

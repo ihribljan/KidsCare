@@ -2,11 +2,7 @@
 
     include 'models/JavniPoziviModel.php';
 
-    $poziv = new JavniPozivi();
-    $lista = $poziv->getAll();
-
-    $smarty->assign('lista', $lista);
-
+    $smarty->assign('stranicenje_broj_stranica', PostavkeSustava::$Stranicenje_Broj_Stranica);
     $smarty->display('JavniPozivi.tpl');
 
 ?>

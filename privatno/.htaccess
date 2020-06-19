@@ -1,0 +1,6 @@
+AuthType Basic
+AuthName "Restricted Files"
+# (Following line optional)
+AuthBasicProvider file
+AuthUserFile "/var/www/WebDiP/2019_projekti/WebDiP2019x047/.htpasswd"
+Require user WebDiP2019x047
