@@ -63,7 +63,7 @@
         // ako registracija nije 0, jer u provjeri polja ako ima greška postavljena vrijednost je postavljena na 0
         if($registracija_uspjesna != 0)
         {            
-            $secret_key = '6LdJwJ8UAAAAAHpf9ay49fr1aKdY42w3GFUbHMR-';
+            $secret_key = "";
             $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . $secret_key . '&response='.$recaptchaResponse;
             $response = @file_get_contents($url);
             $data = json_decode($response, true);
